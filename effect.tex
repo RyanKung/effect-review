@@ -15,6 +15,21 @@
 \usepackage{extarrows}
 \SetWatermarkText{DRAFT POST}
 \SetWatermarkScale{3}
+
+\lstset{ 
+  language=Python,                     % the language of the code
+  basicstyle=\footnotesize,       % the size of the fonts that are used for the code
+  numbers=none,                   % where to put the line-numbers
+  backgroundcolor=\color{white},  % choose the background color. You must add \usepackage{color}
+  showspaces=false,               % show spaces adding particular underscores
+  showstringspaces=false,         % underline spaces within strings
+  showtabs=false,                 % show tabs within strings adding particular underscores
+  tabsize=2,                      % sets default tabsize to 2 spaces
+  breaklines=true,                % sets automatic line breaking
+  keywordstyle=\color{blue},      % keyword style
+  commentstyle=\color{darkgray},   % comment style
+  stringstyle=\color{black},      % string literal style
+} 
 \setlength\parskip{.5\baselineskip}
 \author{Ryan J. Kung \\ryankung@ieee.org\\}
 \title{A Survey of Algebraic Effect System}
@@ -39,7 +54,7 @@ Syntax $do$ is quiet similar to the $do$ of Monad which is present for Sequencin
   op \xlongequal[]{def} fun\ x \rightarrow op(x; y.return\ y)
 \end{gather}
 
-\subsection{IO Example}
+\subsection{Basic Example}
 
 Consider a simple handler is:
 
@@ -64,10 +79,12 @@ def perform_read_line(dispatcher, readline):
 def main():
     effect = get_user_name()
     effect = effect.on(
-        success=lambda result: print("I like {} too!".format(result)),
-        error=lambda e: print("sorry, there was an error. {}".format(e)))
+        success=lambda r: print("I like {} too!".format(r)),
+        error=lambda e: print("sorry. {}".format(e)))
 
-    dispatcher = TypeDispatcher({ReadLine: perform_read_line})
+        dispatcher = TypeDispatcher(
+            {ReadLine: perform_read_line}
+        )
     sync_perform(dispatcher, effect)
 \end{lstlisting}
 
@@ -85,7 +102,12 @@ Effect and handeler was introduced by Plotkin and Pretnar in 2009 \cite{lmcs:705
 
 \section{Implementations}
 \subsection{Eff}
+ Eff is a programming language based on the algebraic approach to computational effects, in which effects are viewed as algebraic operations and effect handlers as homomorphisms from free algebras.\cite{eff} Eff supports ﬁrst-class effects and handlers through which we may easily deﬁne new computational effects, seamlessly combine existing ones, and handle them in novel ways.
+
+
 \subsection{Koka}
+Koka is a function-oriented programming language that seperates pure values from side-effecting computations, where the effect of every function is automatically inferred.
+
 \subsection{Other Platforms}
 
 Algebraic Effect usually related to $Eff$ which support Algebraic Effects and Handlers as first class,    Algebraic Effect can also be widely use in common platform such as ECMAScript, .net, JVM, or other programming languages by using a type directed selective CPS translation\cite{algebraic-effects-for-functional-programming}.
@@ -93,10 +115,6 @@ Algebraic Effect usually related to $Eff$ which support Algebraic Effects and Ha
 Since Algebraic Effect and Its Operators are build based on a Monad System on category-V, it can be used for both Strong type languages line Haskell or OCaml and weak type languages like Python or ECMAScript, but there is some challenge that, a Typing algebraic effects is that inferred types became very large or difficult to understand. And for a library based implementation, it do not have full control over the runtime stack.\cite{algebraic-effects-for-functional-programming}.
 
 \begin{itemize}
-\item Koka is a function-oriented programming language that seperates pure values from side-effecting computations, where the effect of every function is automatically inferred.
-
-\item Eff is a programming language based on the algebraic approach to computational effects, in which effects are viewed as algebraic operations and effect handlers as homomorphisms from free algebras.\cite{eff} Eff supports ﬁrst-class effects and handlers through which we may easily deﬁne new computational effects, seamlessly combine existing ones, and handle them in novel ways.
-
 \item Idris is a general purpose pure functional programming language with dependent types. From version 0.9.12 Idris includes a library for side-effect management, Effects.
 
 
