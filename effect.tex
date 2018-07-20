@@ -17,14 +17,14 @@
 \SetWatermarkScale{3}
 \setlength\parskip{.5\baselineskip}
 \author{Ryan J. Kung \\ryankung@ieee.org\\}
-\title{Review: Algebraic Effect and Extensions}
+\title{Review: Algebraic Effects and Handlers}
 \begin{document}
 \maketitle
 % \tableofcontents
-\section{Abstract}
 
 \section{Introduction}
-Algebraic eﬀects are an approach to computational eﬀects based on a premise that impure behaviour arises from a set of operations such as get and set for mutable store, read and print for interactive input and output, or raise for exceptions. This naturally gives rise to handlers not only of exceptions, but of any other eﬀect, yielding a novel concept that, amongst others, can capture stream redirection, backtracking, co-operative multi-threading, and delimited continuations\cite{intro-algebraic-effects-and-handlers}.
+
+Algebraic eﬀects are an approach to computational eﬀects based on a premise that impure behaviour arises from a set of operations such as get and set for mutable store, read and print for interactive input and output, or raise for exceptions. This naturally gives rise to handlers not only of exceptions, but of any other eﬀect, yielding a novel concept that, amongst others, can capture stream redirection, backtracking, co-operative multi-threading, and delimited continuations\cite{intro-algebraic-effects-and-handlers}. 
 
 Operations of algebraic Effect was first introduced by Gordon Poltkin and John Power in 2002 \cite{Plotkin2003} as Algebraic Operation, based on Eugenio Moggi's work \cite{39155, MOGGI91} in 1989-1992 about logics for reasoning and proving equivalence about programs with a strong monad $T$ on a base category $C$ with finite products\cite{Plotkin2003, MOGGI91}. And made the notion system for effects such as: nondeterminism, probabilistic nodeterminism, exceptions, interactive input/output, side-effects, and continuations by identifying it with the notion of $algebraic$ operation.
 
@@ -52,9 +52,12 @@ Since Algebraic Effect and Its Operators are build based on a Monad System on ca
 
 \item Haskell Effect-handlers is a library for writing extensible algebraic effects and handlers with haskell\cite{effect-handlers}.
 \end{itemize}
-\section{Extensions}
 
-Niki Vazou and Daan LeiJen introduced how to combine Algebraic Effect with Monads System\cite{10.1007/978-3-319-28228-2_11}.
+\section{Related work}
+
+Niki Vazou and Daan LeiJen introduced how to combine Algebraic Effect with Monadic  System\cite{10.1007/978-3-319-28228-2_11}. In Leijen and Vazou's work, they combined $monads$ and $effect typing$ by using monad for defining the semantics of effect types and then using algebraic effect types to program with those monads. The idea was implemented as an extension of $Kola$.
+
+Martin Hyland, Paul Blain Levy, Gordon Plotkin, and John Power has introduced an idea of combining Algebraic Effect with continuations\cite{HYLAND200720}.
 \bibliographystyle{plain}
 \bibliography{effect}{}
 \end{document}

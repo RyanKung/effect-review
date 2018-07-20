@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{effect-handlers}
 Blaz~Repas Andraz~Bajt.
@@ -15,6 +15,12 @@ Christopher Armstrong.
 Andrej Bauer and Matija Pretnar.
 \newblock Programming with algebraic effects and handlers.
 \newblock {\em CoRR}, abs/1203.1539, 2012.
+
+\bibitem{HYLAND200720}
+Martin Hyland, Paul~Blain Levy, Gordon Plotkin, and John Power.
+\newblock Combining algebraic effects with continuations.
+\newblock {\em Theoretical Computer Science}, 375(1):20 -- 40, 2007.
+\newblock Festschrift for John C. Reynolds’s 70th birthday.
 
 \bibitem{algebraic-effects-for-functional-programming}
 Daan Leijen.
@@ -50,5 +56,12 @@ Matija Pretnar.
   paper.
 \newblock {\em Electron. Notes Theor. Comput. Sci.}, 319(C):19--35, December
   2015.
+
+\bibitem{10.1007/978-3-319-28228-2_11}
+Niki Vazou and Daan Leijen.
+\newblock From monads to effects and back.
+\newblock In Marco Gavanelli and John Reppy, editors, {\em Practical Aspects of
+  Declarative Languages}, pages 169--186, Cham, 2016. Springer International
+  Publishing.
 
 \end{thebibliography}
