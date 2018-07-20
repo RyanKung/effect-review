@@ -1,0 +1,54 @@
+\begin{thebibliography}{1}
+
+\bibitem{effect-handlers}
+Blaz~Repas Andraz~Bajt.
+\newblock effect-handlers: A library for writing extensible algebraic effects
+  and handlers. similar to extensible-effects but with deep handlers.
+\newblock \url{http://hackage.haskell.org/package/effect-handlers}.
+
+\bibitem{python-effect}
+Christopher Armstrong.
+\newblock Effect.
+\newblock \url{https://github.com/python-effect/effect}, 2014.
+
+\bibitem{eff}
+Andrej Bauer and Matija Pretnar.
+\newblock Programming with algebraic effects and handlers.
+\newblock {\em CoRR}, abs/1203.1539, 2012.
+
+\bibitem{algebraic-effects-for-functional-programming}
+Daan Leijen.
+\newblock Algebraic effects for functional programming.
+\newblock Technical report, August 2016.
+
+\bibitem{39155}
+E.~Moggi.
+\newblock Computational lambda-calculus and monads.
+\newblock In {\em [1989] Proceedings. Fourth Annual Symposium on Logic in
+  Computer Science}, pages 14--23, Jun 1989.
+
+\bibitem{MOGGI91}
+Eugenio Moggi.
+\newblock Notions of computation and monads.
+\newblock {\em Information and Computation}, 93(1):55 -- 92, 1991.
+\newblock Selections from 1989 IEEE Symposium on Logic in Computer Science.
+
+\bibitem{Plotkin2003}
+Gordon Plotkin and John Power.
+\newblock Algebraic operations and generic effects.
+\newblock {\em Applied Categorical Structures}, 11(1):69--94, Feb 2003.
+
+\bibitem{lmcs:705}
+Gordon~D Plotkin and Matija Pretnar.
+\newblock {Handling Algebraic Effects}.
+\newblock {\em {Logical Methods in Computer Science}}, {Volume 9, Issue 4},
+  December 2013.
+
+\bibitem{intro-algebraic-effects-and-handlers}
+Matija Pretnar.
+\newblock An introduction to algebraic effects and handlers. invited tutorial
+  paper.
+\newblock {\em Electron. Notes Theor. Comput. Sci.}, 319(C):19--35, December
+  2015.
+
+\end{thebibliography}
