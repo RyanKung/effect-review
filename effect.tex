@@ -12,28 +12,81 @@
 \usepackage{xcolor}
 \usepackage{graphicx}
 \usepackage{draftwatermark}
+\usepackage{extarrows}
 \SetWatermarkText{DRAFT POST}
 \SetWatermarkScale{3}
 \setlength\parskip{.5\baselineskip}
 \author{Ryan J. Kung \\ryankung@ieee.org\\}
-\title{A Survey of Algebraic Effects and Handlers}
+\title{A Survey of Algebraic Effect System}
 \begin{document}
 \maketitle
 % \tableofcontents
 
 \section{Introduction}
 
-Algebraic eﬀects are an approach to computational eﬀects based on a premise that impure behaviour arises from a set of operations such as get and set for mutable store, read and print for interactive input and output, or raise for exceptions. This naturally gives rise to handlers not only of exceptions, but of any other eﬀect, yielding a novel concept that, amongst others, can capture stream redirection, backtracking, co-operative multi-threading, and delimited continuations\cite{intro-algebraic-effects-and-handlers}. 
+Algebraic eﬀects are an approach to computational eﬀects based on a premise that impure behaviour arises from a set of operations such as get and set for mutable store, read and print for interactive input and output, or raise for exceptions. This naturally gives rise to handlers not only of exceptions, but of any other eﬀect, yielding a novel concept that, amongst others, can capture stream redirection, backtracking, co-operative multi-threading, and delimited continuations\cite{intro-algebraic-effects-and-handlers}.
 
+\subsection{Syntax and Terms}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\linewidth]{src/syntax.png}
+  \caption{Syntax of Terms \cite{intro-algebraic-effects-and-handlers}}
+\end{figure}
+
+Syntax $do$ is quiet similar to the $do$ of Monad which is present for Sequencing, and the operation calls, it can be considered as a lazy functional call like $v.c := op(x)$. The intro paper\cite{intro-algebraic-effects-and-handlers} give out definition of Generic effect as:
+
+\begin{gather}
+  op \xlongequal[]{def} fun\ x \rightarrow op(x; y.return\ y)
+\end{gather}
+
+\subsection{IO Example}
+
+Consider a simple handler is:
+
+\begin{gather}
+  getUserName \xlongequal[]{def} fun\ x \rightarrow readline(\_; k) \rightarrow k.promot\ s)
+\end{gather}
+
+And this simple input \& output example can be implemented with Python and Effect Library\cite{python-effect}:
+
+\begin{lstlisting}[language=Python]
+class ReadLine(object):
+    def __init__(self, prompt):
+        self.prompt = prompt
+
+def get_user_name():
+    return Effect(ReadLine("Enter a candy> "))
+
+@sync_performer
+def perform_read_line(dispatcher, readline):
+    return raw_input(readline.prompt)
+
+def main():
+    effect = get_user_name()
+    effect = effect.on(
+        success=lambda result: print("I like {} too!".format(result)),
+        error=lambda e: print("sorry, there was an error. {}".format(e)))
+
+    dispatcher = TypeDispatcher({ReadLine: perform_read_line})
+    sync_perform(dispatcher, effect)
+\end{lstlisting}
+
+
+\section{Theory}
+\subsection{Algebraic Operation}
 Operations of algebraic Effect was first introduced by Gordon Poltkin and John Power in 2002 \cite{Plotkin2003} as Algebraic Operation, based on Eugenio Moggi's work \cite{39155, MOGGI91} in 1989-1992 about logics for reasoning and proving equivalence about programs with a strong monad $T$ on a base category $C$ with finite products\cite{Plotkin2003, MOGGI91}. And made the notion system for effects such as: nondeterminism, probabilistic nodeterminism, exceptions, interactive input/output, side-effects, and continuations by identifying it with the notion of $algebraic$ operation.
 
 \begin{quotation}
   ``Algebraic operations are, in the sense we shall make precise, a natural generalisation, from $Set$ to an arbitrary symmetric monoidal $V-category$ $C$ with cotensors.''\cite{Plotkin2003}
 \end{quotation}
 
-And effect and handeler was introduced by Plotkin and Pretnar in 2009 \cite{lmcs:705} as computaional effects that can be represented by an equational theory whose oerations produce the effect as hand, which are based on Moggi's monad work, but as a restriction on general monads, algebraic effects have many various advantages: can be freely composed, and there is a natual separation between interfaces and sematics (as handler) \cite{algebraic-effects-for-functional-programming}
+\subsection{Algebraic Handlers}
+Effect and handeler was introduced by Plotkin and Pretnar in 2009 \cite{lmcs:705} as computaional effects that can be represented by an equational theory whose oerations produce the effect as hand, which are based on Moggi's monad work, but as a restriction on general monads, algebraic effects have many various advantages: can be freely composed, and there is a natual separation between interfaces and sematics (as handler) \cite{algebraic-effects-for-functional-programming}
 
 \section{Implementations}
+\subsection{Eff}
+\subsection{Koka}
+\subsection{Other Platforms}
 
 Algebraic Effect usually related to $Eff$ which support Algebraic Effects and Handlers as first class,    Algebraic Effect can also be widely use in common platform such as ECMAScript, .net, JVM, or other programming languages by using a type directed selective CPS translation\cite{algebraic-effects-for-functional-programming}.
 
@@ -52,7 +105,7 @@ Since Algebraic Effect and Its Operators are build based on a Monad System on ca
 \item Haskell Effect-handlers is a library for writing extensible algebraic effects and handlers with haskell\cite{effect-handlers}.
 \end{itemize}
 
-\section{Related work}
+\subsection{Other Extensions}
 
 Niki Vazou and Daan LeiJen introduced how to combine Algebraic Effect with Monadic  System\cite{10.1007/978-3-319-28228-2_11}. In Leijen and Vazou's work, they combined $monads$ and $effect typing$ by using monad for defining the semantics of effect types and then using algebraic effect types to program with those monads. The idea was implemented as an extension of $Kola$.
 
